@@ -1,0 +1,51 @@
+{
+  "application": {
+    "name": "Astra",
+    "description": "Astra is a simple and fast vocal assistant to help you with your simple daily tasks.",
+    "version": "0.1.0",
+    "author": {
+      "name": "Enrico Favale",
+      "email": "enrico.favale@edu.unife.it"
+    }
+  },
+  "system": {
+    "timezone": "Europe/Rome",
+    "wake_word": {
+      "word": "Astra",
+      "enabled": true
+    },
+    "speech_recognition": {
+      "languages": ["en-US", "it-IT"]
+    },
+    "modules": {
+        
+      "weather": {
+        "enabled": true,
+        "api_key": "YOUR_API_KEY"
+      },
+
+      "calendar": {
+        "enabled": true,
+        "api_key": "YOUR_API_KEY"
+      },
+
+      "news": {
+        "enabled": true,
+        "rss_feed_url": "https://news.google.com/rss"
+      },
+
+      "open_applications": {
+        "enabled": true,
+        "applications": [
+            "google chrome",
+            "firefox",
+            "visual studio",
+            "code",
+            "spotify",
+            "discord",
+            "telegram"
+        ]
+      }
+    }
+  }
+}
