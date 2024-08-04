@@ -1,7 +1,0 @@
-# Librerie per il riconoscimento vocale e la sintesi
-SpeechRecognition==3.10.0
-pyttsx3==2.90
-
-# Librerie per la gestione delle richieste HTTP e RSS
-requests==2.28.2
-feedparser==6.0.10
