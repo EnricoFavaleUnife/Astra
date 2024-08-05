@@ -1,30 +1,11 @@
 import speech_recognition as sr
-import logging
+from logger_config import setup_logger
 
-# Configurazione del logger
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-
-# Creazione di un gestore per il file di log
-file_handler = logging.FileHandler('speech_recognition.log')
-file_handler.setLevel(logging.INFO)
-
-# Creazione di un gestore per la console
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.INFO)
-
-# Creazione di un formatter e aggiunta al gestore
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-file_handler.setFormatter(formatter)
-console_handler.setFormatter(formatter)
-
-# Aggiunta dei gestori al logger
-logger.addHandler(file_handler)
-logger.addHandler(console_handler)
+logger = setup_logger(__name__, 'logs/speech_recognition.log')
 
 # Classe di riconoscimento vocale
 class SpeechRecognizer:
-    def __init__(self, language="it-IT"):
+    def __init__(self, language="en-US"):
         self.recognizer = sr.Recognizer()
         self.language = language
 
@@ -56,7 +37,7 @@ class SpeechRecognizer:
             return "Could not request results from the service."
         
 if __name__ == "__main__":
-    recognizer = SpeechRecognizer(language='it-IT')
+    recognizer = SpeechRecognizer(language="en-US")
 
     text = ""
 
