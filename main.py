@@ -17,9 +17,14 @@ def load_modules(modules_config):
             modules[module_name] = module.Module(module_info)
     return modules
 
+def load_user(cofig):
+    user_info = cofig['user']
+    return user_info
+
 def main():
     config = load_config('config.json')
     modules = load_modules(config['modules'])
+    user = load_user(config)
 
     print(f"Modules loaded: {list(modules.keys())}")
 
@@ -29,7 +34,6 @@ def main():
         audio = recognizer.listen()
         if audio:
             text = recognizer.recognize(audio)
-            print(f"Recognized text: {text}")
 
 if __name__ == '__main__':
     main()

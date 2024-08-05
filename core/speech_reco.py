@@ -1,4 +1,6 @@
 import speech_recognition as sr
+import os
+import sys
 from core.logger_config import setup_logger
 
 logger = setup_logger(__name__, 'logs/speech_recognition.log')
@@ -10,10 +12,12 @@ class SpeechRecognizer:
         self.language = language
 
     def listen(self):
+        sys.stderr = open(os.devnull, 'w')
         with sr.Microphone() as source:
-            self.recognizer.adjust_for_ambient_noise(source)
-            logger.info("Listening...")
             try:
+                self.recognizer.adjust_for_ambient_noise(source)
+                os.system('clear')
+                logger.info("Listening...")
                 audio = self.recognizer.listen(source)
                 return audio
             except Exception as e:
