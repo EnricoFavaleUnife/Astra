@@ -8,43 +8,71 @@
       "email": "enrico.favale@edu.unife.it"
     }
   },
+  "user": {
+    "name": "Enrico",
+    "surname": "Favale",
+    "email": "enrico.favale@edu.unife.it",
+    "gender": "male",
+    "age": 21
+  },
   "system": {
     "timezone": "Europe/Rome",
     "wake_word": {
       "word": "Astra",
       "enabled": true
     },
+    "standby_word": {
+      "word": "standby",
+      "enabled": true
+    },
+    "shutdown_word": {
+      "word": "shutdown",
+      "enabled": true
+    },
     "speech_recognition": {
       "languages": ["en-US", "it-IT"]
+    }
+  },
+  "modules": {
+    "weather": {
+      "enabled": false,
+      "api_key": "YOUR_API_KEY"
     },
-    "modules": {
-        
-      "weather": {
-        "enabled": true,
-        "api_key": "YOUR_API_KEY"
-      },
 
-      "calendar": {
-        "enabled": true,
-        "api_key": "YOUR_API_KEY"
-      },
+    "calendar": {
+      "enabled": false,
+      "api_key": "YOUR_API_KEY"
+    },
 
-      "news": {
-        "enabled": true,
-        "rss_feed_url": "https://news.google.com/rss"
-      },
+    "news": {
+      "enabled": false,
+      "rss_feed_url": "https://news.google.com/rss"
+    },
 
-      "open_applications": {
-        "enabled": true,
-        "applications": [
-            "google chrome",
-            "firefox",
-            "visual studio",
-            "code",
-            "spotify",
-            "discord",
-            "telegram"
-        ]
+    "open_applications": {
+      "enabled": false,
+      "applications": {
+        "chrome": {
+          "keywords": ["chrome", "google chrome", "google", "browser"]
+        },
+        "youtube": {
+          "keywords": ["youtube", "yt"]
+        },
+        "firefox": {
+          "keywords": ["firefox", "mozilla firefox", "fox"]
+        },
+        "visual studio code": {
+          "keywords": ["visual studio code", "vscode", "code", "editor"]
+        },
+        "spotify": {
+          "keywords": ["spotify"]
+        },
+        "discord": {
+          "keywords": ["discord"]
+        },
+        "telegram": {
+          "keywords": ["telegram"]
+        }
       }
     }
   }

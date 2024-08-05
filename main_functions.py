@@ -23,49 +23,57 @@ class Main_Functions:
                 modules[module_name] = module.Module(module_info)
         return modules
 
-    def load_user(self, cofig):
-        user_info = cofig['user']
+    def load_user(self):
+        user_info = self.config['user']
         return user_info
 
-    def get_wake_word(self, config):
-        return config.get('system', {}).get('wake_word', {}).get('word', '')
+    def get_wake_word(self):
+        return self.config.get('system', {}).get('wake_word', {}).get('word', '')
     
-    def enter(self, wake_word, user):
+    def get_standby_word(self):
+        return self.config.get('system', {}).get('standby_word', {}).get('word', '')
+    
+    def get_shutdown_word(self):
+        return self.config.get('system', {}).get('shutdown_word', {}).get('word', '')
+    
+    def enter(self):
         while True:
             audio = self.recognizer.listen()
             if audio:
                 text = self.recognizer.recognize(audio).lower()
 
-                if text.startswith(wake_word.lower()):
+                if text.startswith(self.wake_word.lower()):
 
-                    if text == wake_word.lower() + " standby":
+                    if text == self.wake_word.lower() + " " + self.standby_word:
                         return "standby"
                     
-                    if text == wake_word.lower() + " go to sleep":
+                    if text == self.wake_word.lower() + " " +  self.shutdown_word:
                         return "sleep"
 
                     self.tts.text_to_speech(f"You said: {text}")
     
     def start(self):
-        config = self.load_config('config.json')
+        self.config = self.load_config('config.json')
 
-        modules = self.load_modules(config['modules'])
+        self.modules = self.load_modules(self.config['modules'])
 
-        user = self.load_user(config)
-        wake_word = self.get_wake_word(config)
+        self.user = self.load_user()
+        self.wake_word = self.get_wake_word()
+        self.standby_word = self.get_standby_word()
+        self.shutdown_word = self.get_shutdown_word()
 
-        self.tts.text_to_speech(f"Hi {user.get('name')}. When you are ready to start, say {wake_word}")
+        self.tts.text_to_speech(f"Hi {self.user.get('name')}. When you are ready to start, say {self.wake_word}")
 
         while True:
             audio = self.recognizer.listen()
             if audio:
                 text = self.recognizer.recognize(audio)
 
-                if wake_word.lower() in text.lower():
-                    self.tts.text_to_speech(f"Hello {user.get('name')}.")
-                    if modules != []: self.tts.text_to_speech(f"I have loaded the following modules: {', '.join(modules.keys())}")
+                if self.wake_word.lower() in text.lower():
+                    self.tts.text_to_speech(f"Hello {self.user.get('name')}.")
+                    if self.modules != []: self.tts.text_to_speech(f"I have loaded the following modules: {', '.join(self.modules.keys())}")
                     self.tts.text_to_speech("What can I do for you?")
-                    exit = self.enter(wake_word, user)
+                    exit = self.enter()
 
                     if exit == "standby":
                         self.tts.text_to_speech("For now, I'm in standby mode. Call me when you're ready.")
