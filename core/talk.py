@@ -2,7 +2,7 @@ import os
 from gtts import gTTS
 import pygame
 import tempfile
-from logger_config import setup_logger
+from core.logger_config import setup_logger
 
 # Configurazione del logger
 logger = setup_logger(__name__, 'logs/talk.log')

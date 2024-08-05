@@ -1,5 +1,5 @@
 import speech_recognition as sr
-from logger_config import setup_logger
+from core.logger_config import setup_logger
 
 logger = setup_logger(__name__, 'logs/speech_recognition.log')
 
